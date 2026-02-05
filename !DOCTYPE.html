@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be Mine?</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffe5ec; /* Valentine Pink */
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: absolute;
+            bottom: -10%;
+            color: #ff4d6d;
+            font-size: 20px;
+            animation: moveUp 4s linear infinite;
+        }
+
+        @keyframes moveUp {
+            to { transform: translateY(-110vh); opacity: 0; }
+        }
+
+        .container {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        h1 { color: #c9184a; }
+
+        .buttons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            height: 50px; /* Space for buttons */
+        }
+
+        button {
+            padding: 10px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+        }
+
+        #noBtn {
+            background-color: #adb5bd;
+            color: white;
+            position: relative; /* Starts relative, moves to absolute */
+            z-index: 999;
+        }
+
+        /* Result Popup */
+        #success {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: white;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        img { width: 300px; border-radius: 15px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Nimesh will be your valentine ❤️</h1>
+        <div class="buttons">
+            <button id="yesBtn" onclick="celebrate()">Yes</button>
+            <button id="noBtn" onmouseover="moveNo()">No</button>
+        </div>
+    </div>
+
+    <div id="success">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmdrZzR3cnp4Ynk1ZW96cTV4YXFrcXFrcXFrcXFrcXFrcXFrcXFrcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L13NsH0Aij4Sf2Gdf5/giphy.gif">
+        <h1 style="color: #ff4d6d;">Yay! Nimesh will be your valentine! 🎉</h1>
+        <p>Excellent choice.</p>
+    </div>
+
+    <script>
+        function moveNo() {
+            const btn = document.getElementById('noBtn');
+            
+            // Generate random positions
+            // Subtracting 100px to keep the button from flying off the screen edges
+            const x = Math.floor(Math.random() * (window.innerWidth - 100));
+            const y = Math.floor(Math.random() * (window.innerHeight - 100));
+
+            // Set the button to absolute so it can jump anywhere
+            btn.style.position = 'absolute';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        function celebrate() {
+            document.getElementById('success').style.display = 'flex';
+        }
+
+        // Add some falling hearts for 'Valentine Mode'
+        setInterval(() => {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+        }, 300);
+    </script>
+</body>
+</html>
